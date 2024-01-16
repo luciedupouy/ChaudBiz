@@ -1,0 +1,9 @@
+/* Global.css */
+
+body {
+    /* Style du fond que vous souhaitez appliquer */
+    background-color: #eef0f2; /* Remplacez ceci par la couleur ou l'image de fond souhaitée */
+    margin: 10%; /* Supprime les marges par défaut du corps */
+    font-family: 'Open Sauce', sans-serif; /* Ajoutez la police de caractères souhaitée */
+  }
+  
