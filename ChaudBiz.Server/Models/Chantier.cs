@@ -6,7 +6,7 @@ public enum Statut
 }
 public class Chantier
 {
-    public int IdChantier { get; set; }
+    public int ChantierId { get; set; }
     public string NomChantier { get; set; }
     public string Description { get; set; }
     public DateTime DateDebut { get; set; }
