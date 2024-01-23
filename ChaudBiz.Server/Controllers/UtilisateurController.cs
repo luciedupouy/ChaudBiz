@@ -1,89 +1,79 @@
-// AuthController.cs
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-[Route("api/auth")]
+
+
 [ApiController]
-public class AuthController : ControllerBase
+[Route("api/utilisateur")]
+public class UtilisateurController : ControllerBase
 {
-    private readonly UserManager<Utilisateur> _userManager;
-    private readonly SignInManager<Utilisateur> _signInManager;
-    private readonly IConfiguration _configuration;
+    private readonly ChaudBizContext _context;
 
-    public AuthController(UserManager<Utilisateur> userManager, SignInManager<Utilisateur> signInManager, IConfiguration configuration)
+    public UtilisateurController(ChaudBizContext context)
     {
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _configuration = configuration;
+        _context = context;
     }
 
-    [HttpPost("signup")]
-    public async Task<IActionResult> Signup([FromBody] Utilisateur model, string password)
-{
-    var user = new Utilisateur
+    // GET: api/student
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Utilisateur>>> GetItems()
     {
-        NomUtilisateur = model.NomUtilisateur,
-        PrenomUtilisateur = model.PrenomUtilisateur,
-        MailUtilisateur = model.MailUtilisateur,
-        Role = model.Role
-    };
-
-    var result = await _userManager.CreateAsync(user, password);
-
-    if (result.Succeeded)
+        // Get items
+        var items = _context.Utilisateurs;
+        return await items.ToListAsync();
+    }
+    // GET: api/todo/2
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Utilisateur>> GetItem(int id)
     {
-        return Ok(new { Message = "Inscription réussie." });
+        // Find a specific item
+        // SingleAsync() throws an exception if no item is found (which is possible, depending on id)
+        // SingleOrDefaultAsync() is a safer choice here
+        var item = await _context.Utilisateurs.SingleOrDefaultAsync(t => t.UtilisateurId == id);
+
+
+        if (item == null)
+            return NotFound();
+
+
+        return item;
+
     }
 
-    return BadRequest(new { Message = "Erreur lors de l'inscription.", Errors = result.Errors });
-}
-
-    [HttpPost("login")]
-    [HttpPost("login")]
-public async Task<IActionResult> Login([FromBody] Utilisateur model, string password)
-{
-    var user = await _userManager.FindByNameAsync(model.NomUtilisateur);
-
-    if (user != null && await _userManager.CheckPasswordAsync(user, password))
+    [HttpPost("inscription")]
+    public async Task<ActionResult<Utilisateur>> Inscription(Utilisateur item)
     {
-        await _signInManager.SignInAsync(user, isPersistent: false);
-
-        var token = GenerateJwtToken(user);
-
-        return Ok(new { Token = token });
-    }
-
-    return Unauthorized(new { Message = "Identifiant ou mot de passe incorrect." });
-}
-
-    private string GenerateJwtToken(Utilisateur user)
-    {
-        var claims = new[]
+        // Vérifiez si l'utilisateur existe déjà
+        if (_context.Utilisateurs.Any(u => u.MailUtilisateur == item.MailUtilisateur))
         {
-            new Claim(ClaimTypes.NameIdentifier, user.UtilisateurId.ToString()),
-            new Claim(ClaimTypes.Name, user.NomUtilisateur),
-            new Claim(ClaimTypes.Role, user.Role.ToString())
-            // Ajoutez d'autres revendications au besoin
-        };
+            return Conflict(new { Message = "L'utilisateur avec cet e-mail existe déjà." });
+        }
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        // Hasher le mot de passe avant de l'enregistrer
+        item.Mdp = BCrypt.Net.BCrypt.HashPassword(item.Mdp);
 
-        var token = new JwtSecurityToken(
-            _configuration["Jwt:Issuer"],
-            _configuration["Jwt:Issuer"],
-            claims,
-            expires: DateTime.Now.AddMinutes(30),
-            signingCredentials: creds
-        );
+        // Ajouter l'utilisateur à votre DbContext et sauvegarder les modifications
+        _context.Utilisateurs.Add(item);
+        await _context.SaveChangesAsync();
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        return CreatedAtAction(nameof(GetItem), new { id = item.UtilisateurId }, item);
     }
+    
+[HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] Utilisateur model)
+    {
+        var user = await _context.Utilisateurs.SingleOrDefaultAsync(u => u.MailUtilisateur == model.MailUtilisateur);
+
+        if (user != null && BCrypt.Net.BCrypt.Verify(model.Mdp, user.Mdp))
+        {
+            // Logique de connexion réussie ici
+            // ...
+
+            return Ok(new { Message = "Connexion réussie." });
+        }
+
+        return Unauthorized(new { Message = "Identifiant ou mot de passe incorrect." });
+    }
+
+
 }

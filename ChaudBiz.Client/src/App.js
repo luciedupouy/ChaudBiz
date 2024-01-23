@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Switch>
-      <Route path="/inscription" component={Inscription} />
+        <Route path="/inscription" component={Inscription} />
         <Route path="" component={Login} />
         {/* Ajoutez d'autres routes pour d'autres pages */}
         {/* <Route path="/home" component={Home} /> */}
