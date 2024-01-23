@@ -3,14 +3,15 @@
 /* Ajoutez vos styles ici */
 
 form {
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 70%;
+  margin: 0 auto;
+  padding: 5%;
+  padding-bottom: 2%;
   }
 h1 {
-    margin-top: 10%;
-    margin-bottom: 15%;
-    color:#011638;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  color: #011638;
 }
   
   label {
@@ -35,7 +36,6 @@ h1 {
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    margin-top: 10%;
   }
   
   button:hover {
@@ -44,10 +44,17 @@ h1 {
   
   .login {
     text-align: center;
-    margin-top: 40%;
   }
   .logo {
     width: 60%; /* Fait prendre un tiers de la largeur de son conteneur */
     max-width: 300px; /* Limite la largeur maximale à 300px (ajustez selon vos besoins) */
     height: auto; /* Maintient le ratio hauteur/largeur de l'image */
   }
+  
+  .Link {
+    text-decoration: none;
+    text-align: left;
+    color: #C94277;
+    padding-bottom: 5%;
+  }
+  

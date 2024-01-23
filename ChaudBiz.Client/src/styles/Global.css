@@ -1,9 +1,20 @@
 /* Global.css */
 
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Open Sauce', sans-serif;
+}
+
 body {
-    /* Style du fond que vous souhaitez appliquer */
-    background-color: #eef0f2; /* Remplacez ceci par la couleur ou l'image de fond souhaitée */
-    margin: 10%; /* Supprime les marges par défaut du corps */
-    font-family: 'Open Sauce', sans-serif; /* Ajoutez la police de caractères souhaitée */
-  }
-  
+  background-color: #f8f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrer verticalement */
+  height: 100%;
+  overflow: hidden; /* Empêche le défilement */
+  align-items: center; /* Centrer horizontalement */
+
+}
+
+

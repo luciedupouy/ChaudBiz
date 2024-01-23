@@ -1,6 +1,7 @@
 // src/pages/Login.js
 import React, { useState } from 'react';
 import '../styles/Login.css';
+import { Link } from 'react-router-dom';
 import logo from '../logo.jpg'
 
 const Login = () => {
@@ -36,6 +37,7 @@ const Login = () => {
           Connexion
         </button>
       </form>
+      <Link class="Link" to="/inscription">S'inscrire</Link>
     </div>
   );
 };

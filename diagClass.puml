@@ -1,0 +1,54 @@
+@startuml
+class Chantier {
++ ChantierId : int
++ NomChantier : string
++ Description : string
++ DateDebut : DateTime
++ DateFin : DateTime
++ Statut : Statut
++ Adresse : string
++ Client : Client
+}
+class Client {
++ ClientId : int
++ NomClient : string
++ PrenomClient : string
++ MailClient : string
++ Tel : string
+}
+class Document {
++ DocumentId : int 
++ MontantDocument : int
++ DateDocument : DateTime
++ EtatDocument : Etat
++ Client : Client
++ Type : Type 
+}
+class Materiel {
++ MaterielId : int
++ Label : string
++ Quantite : int
++ Etat : Materiel
+}
+class Rdv {
++ RdvId : int
++ DateRdv : DateTime
++ Lieu : string
++ Description : string 
++ Client : Client
++ Utilisateur : Utilisateur
+}
+class Utilisateur {
++ Utilisateur : int
++ NomUtilisateur : string 
++ PrenomUtilisateur : string
++ MailUtilisateur : string 
+- Mdp : string
++ Role : Role
+}
+Chantier "1..1" --  "1..1" Client
+Document "1..1" -- "1..1" Client
+Rdv "1..1" -- "1..1" Client
+Rdv "1..1" -- "1..1" Utilisateur
+
+@enduml

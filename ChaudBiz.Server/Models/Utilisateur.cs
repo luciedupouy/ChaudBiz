@@ -9,6 +9,6 @@ public class Utilisateur
     public string NomUtilisateur { get; set; }
     public string PrenomUtilisateur { get; set; }
     public string MailUtilisateur { get; set; }
-    public string Mdp { get; set; }
+    private string mdp;
     public Role Role {get;set;}
 }
