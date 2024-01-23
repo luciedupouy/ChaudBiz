@@ -19,7 +19,7 @@ h1 {
     margin-bottom: 8px;
   }
   
-  input {
+  input,select {
     width: 70%;
     border: none; 
     border-bottom: 1px solid #011638; 

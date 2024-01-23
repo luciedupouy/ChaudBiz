@@ -10,6 +10,9 @@ const Inscription = () => {
   const [prenom, setPrenom] = useState('');
   const [mail, setMail] = useState('');
   const [mdp, setMdp] = useState('');
+  const [role, setRole] = useState('');
+
+  const roles = ['ADMINISTRATEUR', 'OUVRIER']; 
 
   const handleInscription = () => {
     // Logique d'inscription ici
@@ -17,6 +20,7 @@ const Inscription = () => {
     console.log('Prénom:', prenom);
     console.log('Mail:', mail);
     console.log('Mot de passe:', mdp);
+    console.log('Rôle', role);
   };
 
   return (
@@ -52,6 +56,14 @@ const Inscription = () => {
           value={mdp}
           onChange={(e) => setMdp(e.target.value)}
         />
+        <select value={role} onChange={(e) => setRole(e.target.value)}>
+          <option value="">Sélectionnez un rôle</option>
+          {roles.map((r) => (
+            <option key={r} value={r}>
+              {r}
+            </option>
+          ))}
+        </select>
 
         <button type="button" onClick={handleInscription}>
           S'inscrire
