@@ -2,29 +2,38 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
 import { Link } from 'react-router-dom';
-import logo from '../logo.jpg'
+import logo from '../logo.jpg';
+import axios from 'axios';
 
 const Login = () => {
-  const [id, setId] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
 
-  const handleLogin = () => {
-    // Logique de connexion ici
-    console.log('id:', id);
-    console.log('Password:', password);
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/utilisateur/login', {
+        MailUtilisateur: email,
+        Mdp: password,
+      });
+
+      // Si la connexion réussit, vous pouvez gérer la suite ici
+      console.log('Connexion réussie:', response.data);
+    } catch (error) {
+      // Gérer les erreurs de connexion ici
+      console.error('Erreur de connexion:', error.response.data);
+    }
   };
 
   return (
-    <div class="login">
-      <img class="logo" src={logo} alt='logo'></img>
+    <div className="login">
+      <img className="logo" src={logo} alt='logo'></img>
       <h1>Connexion</h1>
       <form>
         <input
-          type="id"
-          placeholder='Identifiant'
-          value={id}
-          onChange={(e) => setId(e.target.value)}
+          type="email"  // Utilisez 'email' pour le type d'e-mail
+          placeholder='Adresse e-mail'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
@@ -38,7 +47,7 @@ const Login = () => {
           Connexion
         </button>
       </form>
-      <Link class="Link" to="/inscription">S'inscrire</Link>
+      <Link className="Link" to="/inscription">S'inscrire</Link>
     </div>
   );
 };
