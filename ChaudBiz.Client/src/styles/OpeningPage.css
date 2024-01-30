@@ -1,0 +1,24 @@
+/* OpeningPage.css */
+
+.opening-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .logo {
+    width: 80%;
+    height: auto;
+    max-width: 300px;
+     /* Ajoutez une marge en bas du logo selon vos préférences */
+  }
+  
+  .enter-app-link {
+    text-decoration: none;
+    color: #333; /* Couleur du texte du lien */
+    font-weight: bold;
+    cursor: pointer;
+  }
+  

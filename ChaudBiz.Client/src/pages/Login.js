@@ -11,18 +11,27 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/api/utilisateur/login', {
+      const response = await axios.post('http://localhost:5257/api/utilisateur/login', {
         MailUtilisateur: email,
         Mdp: password,
       });
-
-      // Si la connexion réussit, vous pouvez gérer la suite ici
+  
       console.log('Connexion réussie:', response.data);
     } catch (error) {
-      // Gérer les erreurs de connexion ici
-      console.error('Erreur de connexion:', error.response.data);
+      if (error.response) {
+        // La requête a été effectuée et le serveur a répondu avec un statut d'erreur
+        console.error('Erreur de connexion:', error.response.data);
+      } else if (error.request) {
+        // La requête a été effectuée, mais aucune réponse n'a été reçue
+        console.error('Pas de réponse reçue:', error.request);
+      } else {
+        // Une erreur s'est produite lors de la configuration de la requête
+        console.error('Erreur lors de la configuration de la requête:', error.message);
+      }
     }
   };
+  
+  
 
   return (
     <div className="login">

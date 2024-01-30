@@ -1,6 +1,6 @@
 @startuml
 class Chantier {
-+ ChantierId : int
++ ChantierId : int (PK)
 + NomChantier : string
 + Description : string
 + DateDebut : DateTime
@@ -10,14 +10,14 @@ class Chantier {
 + Client : Client
 }
 class Client {
-+ ClientId : int
++ ClientId : int (PK)
 + NomClient : string
 + PrenomClient : string
 + MailClient : string
 + Tel : string
 }
 class Document {
-+ DocumentId : int 
++ DocumentId : int (PK)
 + MontantDocument : int
 + DateDocument : DateTime
 + EtatDocument : Etat
@@ -25,13 +25,13 @@ class Document {
 + Type : Type 
 }
 class Materiel {
-+ MaterielId : int
++ MaterielId : int (PK)
 + Label : string
 + Quantite : int
-+ Etat : Materiel
++ Etat : EtatMateriel
 }
 class Rdv {
-+ RdvId : int
++ RdvId : int (PK)
 + DateRdv : DateTime
 + Lieu : string
 + Description : string 
@@ -39,16 +39,28 @@ class Rdv {
 + Utilisateur : Utilisateur
 }
 class Utilisateur {
-+ Utilisateur : int
++ UtilisateurId : int (PK)
 + NomUtilisateur : string 
 + PrenomUtilisateur : string
 + MailUtilisateur : string 
 - Mdp : string
 + Role : Role
 }
-Chantier "1..1" --  "1..1" Client
-Document "1..1" -- "1..1" Client
-Rdv "1..1" -- "1..1" Client
-Rdv "1..1" -- "1..1" Utilisateur
+
+
+class Message {
++ MessageId : int (PK)
++ Emetteur : Utilisateur 
++ Recepteur : Utilisateur 
++ Contenu : string
++ Date : DateTime
+}
+
+Chantier "1..*" -- "1..1" Client
+Document "1..*" -- "1..1" Client
+Rdv "1..*" -- "1..1" Client
+Rdv "1..*" -- "1..1" Utilisateur
+Message "0..1" -- "1..*" Utilisateur : "Emetteur"
+Message "0..1" -- "1..*" Utilisateur : "Recepteur"
 
 @enduml
