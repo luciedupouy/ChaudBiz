@@ -5,7 +5,6 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #f0f0f0; /* Couleur de fond de la barre de navigation */
     display: flex;
     justify-content: space-around;
     padding: 10px;

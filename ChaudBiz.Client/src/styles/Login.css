@@ -29,7 +29,7 @@ h1 {
     outline: none; 
   }
   
-  button {
+  .login button {
     background-color: #0D21A1;
     color: #fff;
     padding: 15px 30%;

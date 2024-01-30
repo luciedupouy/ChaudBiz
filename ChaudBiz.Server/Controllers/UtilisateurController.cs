@@ -40,40 +40,51 @@ public class UtilisateurController : ControllerBase
 
     }
 
-    [HttpPost("inscription")]
-    public async Task<ActionResult<Utilisateur>> Inscription(Utilisateur item)
+   [HttpPost("inscription")]
+public async Task<ActionResult<Utilisateur>> Inscription(Utilisateur item)
+{
+    // Vérifiez si l'utilisateur existe déjà
+    if (_context.Utilisateurs.Any(u => u.MailUtilisateur == item.MailUtilisateur))
     {
-        // Vérifiez si l'utilisateur existe déjà
-        if (_context.Utilisateurs.Any(u => u.MailUtilisateur == item.MailUtilisateur))
-        {
-            return Conflict(new { Message = "L'utilisateur avec cet e-mail existe déjà." });
-        }
-
-        // Hasher le mot de passe avant de l'enregistrer
-        item.Mdp = BCrypt.Net.BCrypt.HashPassword(item.Mdp);
-
-        // Ajouter l'utilisateur à votre DbContext et sauvegarder les modifications
-        _context.Utilisateurs.Add(item);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetItem), new { id = item.UtilisateurId }, item);
+        return Conflict(new { Message = "L'utilisateur avec cet e-mail existe déjà." });
     }
+
+    // Ajoutez une validation du rôle (par exemple, ADMINISTRATEUR ou OUVRIER)
+    if (item.Role != "ADMINISTRATEUR" && item.Role != "OUVRIER")
+    {
+        return BadRequest(new { Message = "Le rôle spécifié n'est pas valide." });
+    }
+
+    // Hasher le mot de passe avant de l'enregistrer
+    item.Mdp = BCrypt.Net.BCrypt.HashPassword(item.Mdp);
+
+    // Ajouter l'utilisateur à votre DbContext et sauvegarder les modifications
+    _context.Utilisateurs.Add(item);
+    await _context.SaveChangesAsync();
+
+    return CreatedAtAction(nameof(GetItem), new { id = item.UtilisateurId }, item);
+}
+
+
     
 [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] Utilisateur model)
+public async Task<IActionResult> Login([FromBody] UtilisateurDto loginDto)
+{
+    var user = await _context.Utilisateurs.SingleOrDefaultAsync(u => u.MailUtilisateur == loginDto.MailUtilisateur);
+
+    if (user != null && BCrypt.Net.BCrypt.Verify(loginDto.Mdp, user.Mdp))
     {
-        var user = await _context.Utilisateurs.SingleOrDefaultAsync(u => u.MailUtilisateur == model.MailUtilisateur);
+        // La connexion est réussie
+        // Vous pouvez ajouter d'autres actions nécessaires après une connexion réussie
 
-        if (user != null && BCrypt.Net.BCrypt.Verify(model.Mdp, user.Mdp))
-        {
-            // Logique de connexion réussie ici
-            // ...
-
-            return Ok(new { Message = "Connexion réussie." });
-        }
-
-        return Unauthorized(new { Message = "Identifiant ou mot de passe incorrect." });
+        return Ok(new { Message = "Connexion réussie." });
     }
+
+    // Si l'utilisateur n'existe pas ou si le mot de passe ne correspond pas, retournez une réponse Unauthorized
+    return Unauthorized(new { Message = "Identifiant ou mot de passe incorrect." });
+}
+
+
 
 
 }

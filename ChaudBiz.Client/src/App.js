@@ -5,7 +5,7 @@ import Login from './pages/Login'; // Importer la page Login
 import Inscription from './pages/Inscription'; // Importer la page Inscription
 import AccueilO from './pages/AccueilO';
 import OpeningPage from './pages/PremierePage';
-import GlobalStyles from './styles/Global.css'; // Importez le style global
+import  './styles/Global.css'; // Importez le style global
 
 function App() {
   return (
