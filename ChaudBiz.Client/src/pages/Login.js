@@ -1,16 +1,14 @@
-// src/pages/Login.js
 import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import logo from '../logo.jpg';
 import axios from 'axios';
-
-// ... importations et autres parties de votre code
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [role, setRole] = useState('');
+  const [error, setError] = useState('');
 
   const handleLogin = async () => {
     try {
@@ -18,9 +16,8 @@ const Login = () => {
         MailUtilisateur: email,
         Mdp: password,
       });
-
-      // Vérifiez le rôle dans la réponse
-      const userRole = response.data?.Role;
+      console.log(response);
+      const userRole = response.data?.role;
       console.log('Role récupéré:', userRole);
 
       if (userRole === 'ADMINISTRATEUR') {
@@ -29,42 +26,36 @@ const Login = () => {
         setRole('OUVRIER');
       }
 
-      // Marquez l'utilisateur comme connecté
       setLoggedIn(true);
     } catch (error) {
       console.error('Erreur de connexion:', error.response ? error.response.data : error.message);
+      setError('Identifiant ou mot de passe incorrect.');
     }
   };
 
-  console.log('loggedIn:', loggedIn);
-  console.log('role:', role);
-
-  // Redirigez l'utilisateur en fonction de son rôle
   if (loggedIn) {
-    console.log('Rediriger vers la page correspondante');
     if (role === 'ADMINISTRATEUR') {
       return <Redirect to="/accueila" />;
     } else if (role === 'OUVRIER') {
       return <Redirect to="/accueil" />;
     }
-  }  
-
+  }
 
   return (
     <div className="login">
-      <img className="logo" src={logo} alt='logo'></img>
+      <img className="logo" src={logo} alt="logo" />
       <h1>Connexion</h1>
       <form>
         <input
-          type="email"  // Utilisez 'email' pour le type d'e-mail
-          placeholder='Adresse e-mail'
+          type="email"
+          placeholder="Adresse e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
-          placeholder='Mot de passe'
+          placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -73,7 +64,10 @@ const Login = () => {
           Connexion
         </button>
       </form>
-      <Link className="Link" to="/inscription">S'inscrire</Link>
+      <p style={{ color: 'red' }}>{error}</p>
+      <Link className="Link" to="/inscription">
+        S'inscrire
+      </Link>
     </div>
   );
 };

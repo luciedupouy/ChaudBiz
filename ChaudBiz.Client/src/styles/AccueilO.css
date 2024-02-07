@@ -1,0 +1,20 @@
+.AccueilO {
+    position: relative;
+    padding: 10% 0%;
+    margin: 10% 4% 0; /* Ajoutez une marge supérieure pour éviter que le contenu ne soit directement sous l'en-tête */
+    overflow-y: auto; /* Ajoutez un défilement vertical lorsque le contenu dépasse */
+    max-height: calc(100vh - 20%);
+}
+
+
+.boxchantier button {
+    background-color: #0D21A1;
+    color: #fff;
+    padding: 8px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    display: block; /* Assurez-vous que le bouton est affiché en tant que bloc */
+    margin: 0 auto; /* Centrez horizontalement */
+    margin-top: 10px; /* Ajoutez un espace au-dessus du bouton */
+  }

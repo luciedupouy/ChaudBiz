@@ -12,8 +12,6 @@ body {
   flex-direction: column;
   justify-content: center; /* Centrer verticalement */
   height: 100%;
-  overflow: hidden; /* Empêche le défilement */
-
 }
 
 

@@ -1,0 +1,12 @@
+/* Header.css */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #0D21A1;
+    text-align: center;
+    z-index: 1000; 
+    padding :20px 0;
+  }
+  

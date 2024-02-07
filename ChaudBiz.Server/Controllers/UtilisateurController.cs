@@ -74,10 +74,11 @@ public async Task<IActionResult> Login([FromBody] UtilisateurDto loginDto)
 
     if (user != null && BCrypt.Net.BCrypt.Verify(loginDto.Mdp, user.Mdp))
     {
-        // La connexion est réussie
-        // Vous pouvez ajouter d'autres actions nécessaires après une connexion réussie
+         var userRole = user.Role;
+         Console.WriteLine("Rôle de l'utilisateur:", userRole); // Ajoutez ce log pour vérifier le rôle
 
-        return Ok(new { Message = "Connexion réussie." });
+
+    return Ok(new { Message = "Connexion réussie.", Role = userRole });
     }
 
     // Si l'utilisateur n'existe pas ou si le mot de passe ne correspond pas, retournez une réponse Unauthorized

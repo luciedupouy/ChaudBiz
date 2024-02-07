@@ -8,6 +8,7 @@
     display: flex;
     justify-content: space-around;
     padding: 10px;
+  background-color: #f8f9f9;
   }
   .navbar-link {
     text-decoration: none;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
-import { Link } from 'react-router-dom';
-import logo from '../logo.jpg';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 const Inscription = () => {
@@ -12,6 +11,8 @@ const Inscription = () => {
   const [role, setRole] = useState('');
 
   const roles = ['ADMINISTRATEUR', 'OUVRIER'];
+  const [inscriptionReussie, setInscriptionReussie] = useState(false);
+
 
   const handleInscription = async () => {
     try {
@@ -26,6 +27,7 @@ const Inscription = () => {
       if (response && response.data) {
         console.log('Réponse du serveur:', response.data);
         // Gérer la réponse du serveur ici (redirection, affichage d'un message, etc.)
+        setInscriptionReussie(true);
       } else {
         console.error('Réponse du serveur non valide:', response);
         // Gérer les erreurs ici (affichage d'un message d'erreur, etc.)
@@ -35,7 +37,9 @@ const Inscription = () => {
       // Gérer les erreurs ici (affichage d'un message d'erreur, etc.)
     }
   };
-  
+  if (inscriptionReussie) {
+    return <Redirect to="/connexion" />;
+  }
 
   return (
     <div className="login">
