@@ -1,4 +1,8 @@
+//SeedData seedData = new SeedData();
+//seedData.Init();
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
