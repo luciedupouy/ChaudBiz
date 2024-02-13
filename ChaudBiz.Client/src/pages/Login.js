@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import logo from '../logo.jpg';
 import axios from 'axios';
+import  '../styles/Global.css'; // Importez le style global
+
 
 const Login = () => {
   const [email, setEmail] = useState('');

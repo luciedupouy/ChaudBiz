@@ -47,20 +47,17 @@ class Utilisateur {
 + Role : Role
 }
 
-
-class Message {
-+ MessageId : int (PK)
-+ Emetteur : Utilisateur 
-+ Recepteur : Utilisateur 
-+ Contenu : string
-+ Date : DateTime
+class MaterielChantier {
++ MaterielCId : int (PK)
++ Type : Type
++ Materiels : List<Materiel>
 }
+
 
 Chantier "1..*" -- "1..1" Client
 Document "1..*" -- "1..1" Client
 Rdv "1..*" -- "1..1" Client
 Rdv "1..*" -- "1..1" Utilisateur
-Message "0..1" -- "1..*" Utilisateur : "Emetteur"
-Message "0..1" -- "1..*" Utilisateur : "Recepteur"
+Chantier "1..*" -- "1..1" MaterielChantier
 
 @enduml

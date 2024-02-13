@@ -4,10 +4,15 @@ public enum Statut
     EN_COURS,
     TERMINE
 }
+public enum TypeChantier {
+    CLIMATISATION, 
+    POMPE,
+    CHAUDIERE
+}
 public class Chantier
 {
     public int ChantierId { get; set; }
-    public string NomChantier { get; set; }
+    public TypeChantier Type { get; set; }
     public string Description { get; set; }
     public DateTime DateDebut { get; set; }
     public DateTime DateFin { get; set; }

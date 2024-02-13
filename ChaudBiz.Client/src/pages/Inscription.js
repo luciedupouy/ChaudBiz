@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../styles/Login.css';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import  '../styles/Global.css'; // Importez le style global
+
 
 const Inscription = () => {
   const [nom, setNom] = useState('');

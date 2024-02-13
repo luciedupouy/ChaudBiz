@@ -1,9 +1,10 @@
-.AccueilO {
+.ouvr {
     position: relative;
-    padding: 10% 0%;
-    margin: 10% 4% 0; /* Ajoutez une marge supérieure pour éviter que le contenu ne soit directement sous l'en-tête */
-    overflow-y: auto; /* Ajoutez un défilement vertical lorsque le contenu dépasse */
-    max-height: calc(100vh - 20%);
+    display: block;
+    justify-content: initial;
+    padding: 100px 0%;
+    margin: 70px 4% 0; /* Ajoutez une marge supérieure pour éviter que le contenu ne soit directement sous l'en-tête */
+    overflow-y:auto; /* Ajoutez un défilement vertical lorsque le contenu dépasse */
 }
 
 
