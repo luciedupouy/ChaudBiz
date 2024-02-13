@@ -7,6 +7,7 @@ public class ChaudBizContext : DbContext
     public DbSet<Materiel> Materiels { get; set; } = null!;
     public DbSet<Rdv> Rdvs { get; set; } = null!;
     public DbSet<Utilisateur> Utilisateurs { get; set; } = null!;
+    public DbSet<MaterielChantier> MaterielChantiers {get;set;}=null!;
 
     public string DbPath { get; private set; }
     public ChaudBizContext()
