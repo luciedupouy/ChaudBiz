@@ -14,7 +14,7 @@ function App() {
         <Route path="/inscription" component={Inscription} />
         <Route path="/accueil" component={AccueilO}/>
         <Route path="/connexion" component={Login} />
-        <Route path="/chantier/:id" component={ChantierDetails} /> {/* Route pour les détails du chantier */}
+        <Route path="/chantier/:chantierId" component={ChantierDetails} /> {/* Route pour les détails du chantier */}
         <Route path="" component={OpeningPage}/>
       </Switch>
     </Router>

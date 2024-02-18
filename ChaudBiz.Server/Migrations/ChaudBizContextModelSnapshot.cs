@@ -39,11 +39,10 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("NomChantier")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("Statut")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ChantierId");
@@ -121,12 +120,31 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("MaterielChantierId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Quantite")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("MaterielId");
 
+                    b.HasIndex("MaterielChantierId");
+
                     b.ToTable("Materiels");
+                });
+
+            modelBuilder.Entity("MaterielChantier", b =>
+                {
+                    b.Property<int>("MaterielChantierId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TypeC")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("MaterielChantierId");
+
+                    b.ToTable("MaterielChantiers");
                 });
 
             modelBuilder.Entity("Rdv", b =>
@@ -183,8 +201,9 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UtilisateurId");
 
@@ -213,6 +232,13 @@ namespace Server.Migrations
                     b.Navigation("Client");
                 });
 
+            modelBuilder.Entity("Materiel", b =>
+                {
+                    b.HasOne("MaterielChantier", null)
+                        .WithMany("Materiels")
+                        .HasForeignKey("MaterielChantierId");
+                });
+
             modelBuilder.Entity("Rdv", b =>
                 {
                     b.HasOne("Client", "Client")
@@ -230,6 +256,11 @@ namespace Server.Migrations
                     b.Navigation("Client");
 
                     b.Navigation("Utilisateur");
+                });
+
+            modelBuilder.Entity("MaterielChantier", b =>
+                {
+                    b.Navigation("Materiels");
                 });
 #pragma warning restore 612, 618
         }

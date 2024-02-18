@@ -1,5 +1,5 @@
-//SeedData seedData = new SeedData();
-//seedData.Init();
+SeedData seedData = new SeedData();
+seedData.Init();
 
 var builder = WebApplication.CreateBuilder(args);
 

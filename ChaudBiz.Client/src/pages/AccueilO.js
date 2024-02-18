@@ -5,12 +5,22 @@ import ChantierBox from '../components/ChantierBox';
 import '../styles/AccueilO.css';
 
 const AccueilO = () => {
-  const [chantiers, setChantiers] = useState([]);
+  const [chantierIds, setChantierIds] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:5257/api/chantier')
-      .then(response => response.json())
-      .then(data => setChantiers(data))
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch chantiers');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Data:', data);
+        const ids = data.map(chantier => chantier.chantierId);
+        console.log('Chantier IDs:', ids);
+        setChantierIds(ids);
+      })
       .catch(error => console.error('Error fetching chantiers:', error));
   }, []);
 
@@ -19,11 +29,11 @@ const AccueilO = () => {
       <Header titre="Accueil" />
       <div className="ouvr">
         <h3>Mon programme du jour</h3>
-        {chantiers.length > 0 ? (
+        {chantierIds.length > 0 ? (
           <div className="chantiers">
-            {chantiers.map(chantier => (
-             <div key={chantier.ChantierId}>{chantier.ChantierId}</div>
-))}
+            {chantierIds.map(id => (
+              <ChantierBox key={id} chantierId={id} />
+            ))}
           </div>
         ) : (
           <p>Aucun chantier programmé pour aujourd'hui.</p>
