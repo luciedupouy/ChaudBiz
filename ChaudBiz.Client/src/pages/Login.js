@@ -39,7 +39,7 @@ const Login = () => {
     if (role === 'ADMINISTRATEUR') {
       return <Redirect to="/accueila" />;
     } else if (role === 'OUVRIER') {
-      return <Redirect to="/accueil" />;
+      return <Redirect to="/accueilo" />;
     }
   }
 

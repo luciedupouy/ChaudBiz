@@ -3,6 +3,8 @@ import BottomNavbar from '../components/Navbar';
 import Header from '../components/Header';
 import '../styles/AccueilO.css';
 import { useParams } from 'react-router-dom'; 
+import LeafletMap from '../components/Map';
+import "../styles/detailchantier.css"
 
 const getTypeLabel = (typeNum) => {
   switch (typeNum) {
@@ -35,12 +37,13 @@ const ChantierDetails = () => {
   return (
     <div>
       <Header titre="Détails Chantier" />
-      <div>
+      <div className="detailchantier">
         <h2>{getTypeLabel(chantier.type)}</h2>
         <p>Client : {chantier.client}</p>
         <p>Description : {chantier.description}</p>
         <p>Date de début : {chantier.dateDebut}</p>
         <p>Adresse : {chantier.adresse}</p>
+        <LeafletMap address={chantier.adresse} />
       </div>
       <BottomNavbar />
     </div>
