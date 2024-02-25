@@ -14,7 +14,6 @@ public class ChantierController : ControllerBase
         _context = context;
     }
 
-    // GET: api/student
     [HttpGet]
 public async Task<ActionResult<IEnumerable<Chantier>>> GetItems()
 {
@@ -28,6 +27,15 @@ public async Task<ActionResult<IEnumerable<Chantier>>> GetItems()
 
     return items;
 }
+    [HttpGet("by-date/{date}")]
+    public async Task<ActionResult<IEnumerable<Chantier>>> GetItemsDate(DateTime date)
+    {
+        var items = await _context.Chantiers
+            .Where(c => c.DateDebut.Date <= date && c.DateFin.Date >= date)
+            .ToListAsync();
+
+        return items;
+    }
     [HttpGet("{id}")]
     public async Task<ActionResult<Chantier>> GetItem(int id)
     {

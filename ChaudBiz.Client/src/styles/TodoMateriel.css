@@ -1,0 +1,47 @@
+/* TodoMateriel.css */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Couleur de fond semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ombre légère */
+}
+
+.materiel {
+    margin: 4%;
+}
+
+.outil {
+    display:flex;
+    justify-content: space-between;
+    padding-bottom:3%;
+}
+
+.outil button {
+    background-color: #0D21A1;
+    color: #fff;
+    padding: 4px 10%;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.popup-content button {
+    background-color: #C94277;
+    color: #fff;
+    padding: 5px 10%;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
