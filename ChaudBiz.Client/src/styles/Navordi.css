@@ -1,0 +1,26 @@
+.headerordi {
+    position: fixed;
+    top:0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+  background-color: #f9f8f9;
+  align-items: center;
+  }
+
+  .headerordi img{
+    width: 10%;
+  }
+
+.link {
+    text-decoration: none;
+    color: #011638; /* Couleur du texte des liens */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  a.active {
+    color: #c94277;
+  }

@@ -1,0 +1,32 @@
+.indicateurs {
+    display: flex;
+    justify-content: space-around;
+}
+.indicateur {
+    background-color: #0D21A1;
+    color: #f8f9f9;
+    border-radius: 20%;
+    padding: 2% 2%;
+    margin: 0px 3%;
+    display: grid;
+    text-align: center; /* Centrer le contenu à l'intérieur de l'indicateur */
+    grid-template-rows: auto auto auto; /* Définir trois lignes automatiques */
+}
+
+.icone {
+    grid-row: 2; /* Placer l'icône sur la deuxième ligne */
+}
+
+.nombre {
+    font-size: 100px;
+    grid-row: 3; /* Placer le nombre sur la troisième ligne */
+}
+
+.label {
+    /* Styles pour le label (peut être ajusté selon vos besoins) */
+    grid-row: 1; /* Placer le label sur la première ligne */
+    font-weight: bold; /* Mettre en gras */
+    font-size: 24px; /* Taille de la police */
+}
+
+
