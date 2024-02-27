@@ -1,13 +1,63 @@
 import Navordi from '../components/Navordi';
+import React, { useState, useEffect } from 'react';
 import '../styles/AccueilA.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faToolbox, faCalendarAlt, faTools } from '@fortawesome/free-solid-svg-icons';
 
 
 const AccueilA = () => {
-    const chantiersEnAttente = 5;
-    const materielEnAttente = 3;
-    const rendezVousDuJour = 2;
+    const [materielEnAttente, setMaterielEnAttente]=useState(0);
+    const [rendezVousDuJour, setRdvDuJour]=useState(0);
+    const [chantiersEnAttente, setChantiersEnAttente] = useState(0); // État pour stocker le nombre de chantiers en attente
+    const [rdvs, setRdv]=useState([]);
+    // Effectue la requête pour récupérer les chantiers en attente
+    useEffect(() => {
+        fetch('http://localhost:5257/api/chantier/by-status/0')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch chantiers en attente');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setChantiersEnAttente(data.length); 
+            })
+            .catch(error => {
+                console.error('Error fetching chantiers en attente:', error);
+            });
+    }, []); 
+    useEffect(() => {
+        fetch('http://localhost:5257/api/materiel/by-etat/1')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch matériels en attente');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setMaterielEnAttente(data.length); 
+            })
+            .catch(error => {
+                console.error('Error fetching matériels en attente:', error);
+            });
+    }, []); 
+
+    useEffect(() => {
+        fetch('http://localhost:5257/api/rdv/by-date')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch rdv du jour');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setRdvDuJour(data.length); 
+                setRdv(data);
+            })
+            .catch(error => {
+                console.error('Error fetching rdv du jour:', error);
+            });
+    }, []); 
 
     return(
         <div>
@@ -32,7 +82,23 @@ const AccueilA = () => {
                     <span className="nombre">{rendezVousDuJour}</span>
                 </div>
             </div>
-            <h1>Mes rendez-vous</h1>
+            <div>
+                <h1>Mes rendez-vous</h1>
+                {rendezVousDuJour>0 ? (
+                    <div className="rdv">
+                    {rdvs.map((rdv, index)=>(
+                        <div key={index} className="rdv">
+                            <span>{rdv.dateRdv}</span>
+                            <span>{rdv.description}</span>
+                            <span>{rdv.lieu}</span>
+                            <span>{rdv.client}</span>
+                        </div>
+                    ))}
+                    </div>
+                ) : (
+                    <p>Aucun rendez-vous aujourd'hui</p>
+                )}
+            </div>
         </div>
     );
 }

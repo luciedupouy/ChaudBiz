@@ -22,4 +22,13 @@ public class MaterielController : ControllerBase
         var items = _context.Materiels;
         return await items.ToListAsync();
     }
+    [HttpGet("by-etat/{etat}")]
+    public async Task<ActionResult<IEnumerable<Materiel>>> GetItemsByStatus(EtatMateriel etat)
+    {
+        var items = await _context.Materiels
+            .Where(c => c.Etat == etat)
+            .ToListAsync();
+
+        return items;
+    }
 }

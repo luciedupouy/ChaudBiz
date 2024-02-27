@@ -52,20 +52,31 @@ public async Task<ActionResult<IEnumerable<Chantier>>> GetItems()
         return item;
 
     }
-    [HttpPost]
-public async Task<ActionResult<Chantier>> CreateChantier(Chantier chantier)
-{
-    // Check if the chantier object is valid
-    if (!ModelState.IsValid)
+    [HttpGet("by-status/{status}")]
+    public async Task<ActionResult<IEnumerable<Chantier>>> GetItemsByStatus(Statut status)
     {
-        return BadRequest(ModelState);
+        var items = await _context.Chantiers
+            .Where(c => c.Statut == status)
+            .ToListAsync();
+
+        return items;
     }
 
-    // Add the new chantier to the context
-    _context.Chantiers.Add(chantier);
-    await _context.SaveChangesAsync();
 
-    // Return the created chantier
-    return CreatedAtAction(nameof(GetItem), new { id = chantier.ChantierId }, chantier);
-}
+    [HttpPost]
+    public async Task<ActionResult<Chantier>> CreateChantier(Chantier chantier)
+    {
+        // Check if the chantier object is valid
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        // Add the new chantier to the context
+        _context.Chantiers.Add(chantier);
+        await _context.SaveChangesAsync();
+
+        // Return the created chantier
+        return CreatedAtAction(nameof(GetItem), new { id = chantier.ChantierId }, chantier);
+    }
 }
