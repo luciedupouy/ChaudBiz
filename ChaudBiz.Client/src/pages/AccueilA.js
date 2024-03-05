@@ -60,7 +60,7 @@ const AccueilA = () => {
     }, []); 
 
     return(
-        <div>
+        <div className="accueila">
             <Navordi></Navordi>
             <div className="indicateurs">
                 {/* Indicateur pour les chantiers en attente */}
@@ -82,16 +82,17 @@ const AccueilA = () => {
                     <span className="nombre">{rendezVousDuJour}</span>
                 </div>
             </div>
-            <div>
+            <div >
                 <h1>Mes rendez-vous</h1>
                 {rendezVousDuJour>0 ? (
-                    <div className="rdv">
+                    <div>
                     {rdvs.map((rdv, index)=>(
                         <div key={index} className="rdv">
-                            <span>{rdv.dateRdv}</span>
-                            <span>{rdv.description}</span>
-                            <span>{rdv.lieu}</span>
-                            <span>{rdv.client}</span>
+                            <div>{index+1}</div>
+                            <div>Date : {rdv.dateRdv}</div>
+                            <div>Description : {rdv.description}</div>
+                            <div>Lieu : {rdv.lieu}</div>
+                            <div>Client :{rdv.client}</div>
                         </div>
                     ))}
                     </div>

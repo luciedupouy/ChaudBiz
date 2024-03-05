@@ -29,4 +29,13 @@
     font-size: 24px; /* Taille de la police */
 }
 
+.accueila h1 {
+    margin-left: 4%;
+    margin-top: 3%;
+}
 
+.rdv {
+    display: flex;
+    justify-content: space-around;
+    padding: 2% 2%;
+}

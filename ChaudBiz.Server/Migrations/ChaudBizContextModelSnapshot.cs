@@ -26,8 +26,9 @@ namespace Server.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Client")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateDebut")
                         .HasColumnType("TEXT");
@@ -46,8 +47,6 @@ namespace Server.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ChantierId");
-
-                    b.HasIndex("ClientId");
 
                     b.ToTable("Chantiers");
                 });
@@ -208,17 +207,6 @@ namespace Server.Migrations
                     b.HasKey("UtilisateurId");
 
                     b.ToTable("Utilisateurs");
-                });
-
-            modelBuilder.Entity("Chantier", b =>
-                {
-                    b.HasOne("Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("Document", b =>

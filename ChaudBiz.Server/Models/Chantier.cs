@@ -18,5 +18,5 @@ public class Chantier
     public DateTime DateFin { get; set; }
     public Statut Statut { get; set; }
     public string Adresse { get; set; }
-    public Client Client { get; set; }
+    public string Client { get; set; }
 }

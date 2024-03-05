@@ -9,6 +9,7 @@ import ChantierDetails from './pages/ChantierDetails'; // Importer la page de d√
 import TodoMateriel from './pages/TodoMateriel';
 import Planning from './pages/Planning';
 import AccueilA from './pages/AccueilA';
+import Chantier from './pages/Chantier';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/inscription" component={Inscription} />
         <Route path="/accueilo" component={AccueilO}/>
         <Route path="/accueila" component={AccueilA}/>
+        <Route path="/ajoutchantier" component={Chantier}/>
         <Route path="/materiel" component={TodoMateriel}/>
         <Route path="/connexion" component={Login} />
         <Route path="/planning" component={Planning}/>

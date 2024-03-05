@@ -13,7 +13,7 @@ const TodoMateriel = () => {
         if (storedMateriels) {
             setMateriels(JSON.parse(storedMateriels));
         } else {
-            fetch('http://localhost:5257/api/materiel')
+            fetch('http://localhost:5257/api/materiel/post')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to fetch materiels');

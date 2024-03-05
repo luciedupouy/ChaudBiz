@@ -38,14 +38,17 @@ public class RdvController : ControllerBase
     [HttpGet("by-date")]
     public async Task<ActionResult<IEnumerable<Rdv>>> GetItemsByDate()
     {
-       DateTime currentDate = DateTime.Now.Date;
+        // Obtenez la date actuelle
+        DateTime currentDate = DateTime.Now.Date;
 
-    var items = await _context.Rdvs
-        .Where(c => c.DateRdv.Date <= currentDate)
-        .ToListAsync();
+        // Récupérez les rendez-vous de la date actuelle
+        var items = await _context.Rdvs
+            .Where(r => r.DateRdv.Date == currentDate)
+            .ToListAsync();
 
-    return items;
+        return items;
     }
+
     [HttpPost]
     public async Task<ActionResult<Rdv>> CreateRdv(Rdv rdv)
     {
