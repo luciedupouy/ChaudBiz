@@ -10,6 +10,8 @@ import TodoMateriel from './pages/TodoMateriel';
 import Planning from './pages/Planning';
 import AccueilA from './pages/AccueilA';
 import Chantier from './pages/Chantier';
+import PlanningA from './pages/PlanningA';
+import MaterielAttente from './pages/MaterielAttente';
 
 function App() {
   return (
@@ -20,8 +22,10 @@ function App() {
         <Route path="/accueila" component={AccueilA}/>
         <Route path="/ajoutchantier" component={Chantier}/>
         <Route path="/materiel" component={TodoMateriel}/>
+        <Route path="/materielattente" component={MaterielAttente}/>
         <Route path="/connexion" component={Login} />
         <Route path="/planning" component={Planning}/>
+        <Route path="/planninga" component={PlanningA}/>
         <Route path="/chantier/:chantierId" component={ChantierDetails} /> {/* Route pour les détails du chantier */}
         <Route path="" component={OpeningPage}/>
       </Switch>

@@ -14,7 +14,7 @@ public class MaterielController : ControllerBase
         _context = context;
     }
 
-    // GET: api/student
+    // GET: api/materiel
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Materiel>>> GetItems()
     {
@@ -30,5 +30,29 @@ public class MaterielController : ControllerBase
             .ToListAsync();
 
         return items;
+    }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutCourse(int id, Materiel materiel)
+    {
+        if (id != materiel.MaterielId)
+        {
+            return BadRequest();
+        }
+
+        _context.Entry(materiel).State = EntityState.Modified;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!_context.Materiels.Any(m => m.MaterielId == id))
+                return NotFound();
+            else
+                throw;
+        }
+
+        return NoContent();
     }
 }

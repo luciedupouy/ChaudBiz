@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import BottomNavbar from '../components/Navbar';
-import Header from '../components/Header';
 import ChantierBox from '../components/ChantierBox';
 import '../styles/AccueilO.css';
+import Navordi from '../components/Navordi';
+import "../styles/Navordi.css";
 
-const Planning = () => {
+const PlanningA = () => {
     const today = new Date();
     const initialDate = today.toISOString().slice(0, 10); // Date sélectionnée par défaut est la date actuelle au format "YYYY-MM-DD"
     const [selectedDate, setSelectedDate] = useState(initialDate); 
@@ -30,7 +30,7 @@ const Planning = () => {
   
     return (
       <div>
-        <Header titre="Planning" />
+        <Navordi></Navordi>
         <div className="date-selector">
           <label htmlFor="date">Sélectionnez une date :</label>
           <input
@@ -53,9 +53,8 @@ const Planning = () => {
             <p>Aucun chantier prévu pour cette date.</p>
           )}
         </div>
-        <BottomNavbar />
       </div>
     );
   };
   
-  export default Planning;
+  export default PlanningA;

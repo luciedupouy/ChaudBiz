@@ -21,10 +21,10 @@ const Navordi = () => {
             <Link to="/ajoutchantier" className={`link ${isActive('/ajoutchantier')}`}>
             <div>Chantier</div>
             </Link>
-            <Link to="/materiel" className={`link ${isActive('/materiel')}`}>
+            <Link to="/materielattente" className={`link ${isActive('/materielattente')}`}>
             <div>Matériel</div>
             </Link>
-            <Link to="/planning" className={`link ${isActive('/planning')}`}>
+            <Link to="/planninga" className={`link ${isActive('/planninga')}`}>
             <div>Emploi du temps</div>
             </Link>
             <Link to="/doc" className={`link ${isActive('/doc')}`}>
