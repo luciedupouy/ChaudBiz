@@ -32,27 +32,35 @@ public class MaterielController : ControllerBase
         return items;
     }
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutCourse(int id, Materiel materiel)
+public async Task<IActionResult> PutCourse(int id, MaterielDto materielDto)
+{
+    if (id != materielDto.MaterielId)
     {
-        if (id != materiel.MaterielId)
-        {
-            return BadRequest();
-        }
-
-        _context.Entry(materiel).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!_context.Materiels.Any(m => m.MaterielId == id))
-                return NotFound();
-            else
-                throw;
-        }
-
-        return NoContent();
+        return BadRequest();
     }
+
+    var materielToUpdate = await _context.Materiels.FindAsync(id);
+
+    if (materielToUpdate == null)
+    {
+        return NotFound();
+    }
+
+    materielToUpdate.Etat = materielDto.Etat; // Mettre à jour l'état du matériel
+
+    try
+    {
+        await _context.SaveChangesAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+        if (!_context.Materiels.Any(m => m.MaterielId == id))
+            return NotFound();
+        else
+            throw;
+    }
+
+    return NoContent();
+}
+
 }

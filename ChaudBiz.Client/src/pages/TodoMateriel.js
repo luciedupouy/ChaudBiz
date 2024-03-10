@@ -28,23 +28,34 @@ const TodoMateriel = () => {
         }
     }, []); // Assurez-vous de passer un tableau vide en tant que dépendances pour n'exécuter cet effet qu'une seule fois après le montage initial
 
-    const handleAddClick = (materielId) => {
-        // Logique pour ajouter le matériel avec l'identifiant materielId
-        console.log('Materiel ajouté avec l\'identifiant:', materielId);
-        const updatedMateriels = materiels.map(materiel => {
-            if (materiel.materielId === materielId) {
-                return {
-                    ...materiel,
-                    etat: 1 // Mettre à jour l'état à 1 pour le matériau ajouté
-                };
+    const commanderMateriel = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:5257/api/materiel/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ materielId: id, etat: 1 }) // Envoyer l'état mis à jour
+            });
+            if (response.ok) {
+                setShowPopup(true); // Afficher le pop-up après avoir envoyé la requête avec succès
+                // Mettre à jour l'état du matériel localement
+                setMateriels(prevMateriels => 
+                    prevMateriels.map(materiel => {
+                        if (materiel.materielId === id) {
+                            return { ...materiel, etat: 1 }; // Mettre à jour l'état du matériel
+                        }
+                        return materiel;
+                    })
+                );
+            } else {
+                console.error('Failed to update matériel status');
             }
-            return materiel;
-        });
-        setMateriels(updatedMateriels);
-        setShowPopup(true); // Afficher le pop-up
-        // Stocke les données mises à jour dans localStorage
-        localStorage.setItem('materiels', JSON.stringify(updatedMateriels));
+        } catch (error) {
+            console.error('Error updating matériel status', error);
+        }
     };
+    
 
     return (
         <div >
@@ -53,7 +64,7 @@ const TodoMateriel = () => {
                 {materiels.map((materiel, index) => (
                     <div key={index} className="outil">
                         <span>{materiel.label}</span>
-                        <button onClick={() => handleAddClick(materiel.materielId)}>Ajouter</button>
+                        <button onClick={() => commanderMateriel(materiel.materielId)}>Ajouter</button>
                     </div>
                 ))}
             </div>

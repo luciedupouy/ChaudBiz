@@ -20,18 +20,19 @@ const MaterielAttente = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ etat: 0 }) // Envoyer l'état mis à jour
+                body: JSON.stringify({ materielId: id, etat: 0 }) // Envoyer l'état mis à jour
             });
             if (response.ok) {
                 setShowPopup(true); // Afficher le pop-up après avoir envoyé la requête avec succès
                 // Mettre à jour l'état du matériel localement
-                const updatedMateriels = materiels.map(materiel => {
-                    if (materiel.materielId === id) {
-                        return { ...materiel, etat: 0 }; // Mettre à jour l'état du matériel
-                    }
-                    return materiel;
-                });
-                setMateriels(updatedMateriels);
+                setMateriels(prevMateriels => 
+                    prevMateriels.map(materiel => {
+                        if (materiel.materielId === id) {
+                            return { ...materiel, etat: 0 }; // Mettre à jour l'état du matériel
+                        }
+                        return materiel;
+                    })
+                );
             } else {
                 console.error('Failed to update matériel status');
             }
@@ -39,6 +40,7 @@ const MaterielAttente = () => {
             console.error('Error updating matériel status', error);
         }
     };
+    
     
 
     return (
@@ -57,7 +59,7 @@ const MaterielAttente = () => {
             {showPopup && (
                 <div className="popup-overlay">
                     <div className="popup-content">
-                    <p>Votre demande a été envoyée ! </p>
+                    <p>Votre commande est passée ! </p>
                     <button onClick={() => setShowPopup(false)}>Fermer</button>
                     </div>
                 </div>
