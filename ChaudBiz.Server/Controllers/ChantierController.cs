@@ -27,15 +27,17 @@ public async Task<ActionResult<IEnumerable<Chantier>>> GetItems()
 
     return items;
 }
-    [HttpGet("by-date/{date}")]
-    public async Task<ActionResult<IEnumerable<Chantier>>> GetItemsDate(DateTime date)
-    {
-        var items = await _context.Chantiers
-            .Where(c => c.DateDebut.Date <= date && c.DateFin.Date >= date)
-            .ToListAsync();
+    [HttpGet("upcoming")]
+public async Task<ActionResult<IEnumerable<Chantier>>> GetUpcomingItems()
+{
+    var today = DateTime.Today;
+    var upcomingItems = await _context.Chantiers
+        .Where(c => c.DateDebut.Date >= today)
+        .ToListAsync();
 
-        return items;
-    }
+    return upcomingItems;
+}
+
     [HttpGet("{id}")]
     public async Task<ActionResult<Chantier>> GetItem(int id)
     {

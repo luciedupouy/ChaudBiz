@@ -12,7 +12,7 @@ const AccueilA = () => {
     const [rdvs, setRdv]=useState([]);
     // Effectue la requête pour récupérer les chantiers en attente
     useEffect(() => {
-        fetch('http://localhost:5257/api/chantier/by-status/0')
+        fetch('http://localhost:5257/api/chantier/upcoming')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch chantiers en attente');

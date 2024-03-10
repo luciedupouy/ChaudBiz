@@ -8,12 +8,11 @@ const TodoMateriel = () => {
     const [showPopup, setShowPopup] = useState(false); // État pour afficher ou masquer le pop-up
 
     useEffect(() => {
-        // Vérifie s'il y a des données stockées dans localStorage
         const storedMateriels = localStorage.getItem('materiels');
         if (storedMateriels) {
             setMateriels(JSON.parse(storedMateriels));
         } else {
-            fetch('http://localhost:5257/api/materiel/post')
+            fetch('http://localhost:5257/api/materiel/')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to fetch materiels');
@@ -21,7 +20,6 @@ const TodoMateriel = () => {
                     return response.json();
                 })
                 .then(data => {
-                    // Une fois les données récupérées, vous pouvez les définir dans l'état
                     setMateriels(data);
                 })
                 .catch(error => {
