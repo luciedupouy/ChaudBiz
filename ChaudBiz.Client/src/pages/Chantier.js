@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navordi from '../components/Navordi';
 import axios from 'axios';
 import '../styles/Login.css';
 import '../styles/Global.css';
+import { Link } from 'react-router-dom';
 
 const Chantier = () => {
     const [type, setType] = useState(0);
@@ -10,10 +11,27 @@ const Chantier = () => {
     const [dateDebut, setDateDebut] = useState('');
     const [dateFin, setDateFin] = useState('');
     const [adresse, setAdresse] = useState('');
-    const [client, setClient] = useState(null);
+    const [client, setClient] = useState('');
+    const [clientsList, setClientsList] = useState([]);
+    const [ajoutOk, setAjout] = useState(false);
+
+    useEffect(() => {
+        const fetchClients = async () => {
+            try {
+                const response = await axios.get('http://localhost:5257/api/client');
+                if (response && response.data) {
+                    setClientsList(response.data);
+                }
+            } catch (error) {
+                console.error('Erreur lors de la récupération des clients:', error);
+            }
+        };
+
+        fetchClients();
+    }, []);
 
     const types = ['CLIMATISATION', 'POMPE', 'CHAUDIERE'];
-    const [ajoutOk, setAjout] = useState(false);
+
     const getTypeValue = (type) => {
         switch (type) {
             case 'CLIMATISATION':
@@ -26,7 +44,6 @@ const Chantier = () => {
                 return -1; // Valeur par défaut ou valeur incorrecte
         }
     };
-    
 
     const handleDateDebutChange = (event) => {
         setDateDebut(event.target.value);
@@ -71,12 +88,17 @@ const Chantier = () => {
                         </option>
                     ))}
                 </select>
-                <input
-                    type="text"
-                    placeholder="Entrez le nom du client"
-                    value={client}
-                    onChange={(e) => setClient(e.target.value)}
-                />
+                <select value={client} onChange={(e) => setClient(e.target.value)}>
+                    <option value="">Sélectionnez le client</option>
+                    {clientsList.map((client) => (
+                        <option key={client.clientId} value={client.clientId}>
+                            {client.nomClient}
+                        </option>
+                    ))}
+                </select>
+                <p>
+                <Link to="/client">Ajouter un client</Link>
+                </p>
                 <input
                     type="text"
                     placeholder="Entrez l'adresse"
@@ -109,11 +131,12 @@ const Chantier = () => {
                         onChange={handleDateFinChange}
                     />
                 </div>
+                <Link to="/planninga">
                 <button type="button" onClick={ajoutChantier}>
                     Ajouter
                 </button>
+                </Link>
             </form>
-            {ajoutOk && <div className="popup">Le chantier a bien été ajouté !</div>}
         </div>
     );
 }

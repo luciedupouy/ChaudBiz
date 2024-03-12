@@ -12,6 +12,7 @@ import AccueilA from './pages/AccueilA';
 import Chantier from './pages/Chantier';
 import PlanningA from './pages/PlanningA';
 import MaterielAttente from './pages/MaterielAttente';
+import Client from './pages/Client';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/materielattente" component={MaterielAttente}/>
         <Route path="/connexion" component={Login} />
         <Route path="/planning" component={Planning}/>
+        <Route path="/client" component={Client}/>
         <Route path="/planninga" component={PlanningA}/>
         <Route path="/chantier/:chantierId" component={ChantierDetails} /> {/* Route pour les détails du chantier */}
         <Route path="" component={OpeningPage}/>
