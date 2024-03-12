@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/AccueilA.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faToolbox, faCalendarAlt, faTools } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 
 const AccueilA = () => {
@@ -84,6 +85,7 @@ const AccueilA = () => {
             </div>
             <div >
                 <h1>Mes rendez-vous</h1>
+                <Link to="/rdv">Ajouter un rdv </Link>
                 {rendezVousDuJour>0 ? (
                     <div>
                     {rdvs.map((rdv, index)=>(

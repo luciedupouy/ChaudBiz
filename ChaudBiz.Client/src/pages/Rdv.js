@@ -6,14 +6,13 @@ import '../styles/Global.css';
 import { Link } from 'react-router-dom';
 
 const Rdv = () => {
-    const [type, setType] = useState(0);
+    const [lieu, setLieu] = useState('');
     const [description, setDescription] = useState('');
     const [dateDebut, setDateDebut] = useState('');
-    const [dateFin, setDateFin] = useState('');
-    const [adresse, setAdresse] = useState('');
     const [client, setClient] = useState('');
+    const [utilisateur, setUtilisateur] = useState();
     const [clientsList, setClientsList] = useState([]);
-    const [ajoutOk, setAjout] = useState(false);
+    const [utilisateursList, setUtilisateursList]=useState([]);
 
     useEffect(() => {
         const fetchClients = async () => {
@@ -29,44 +28,38 @@ const Rdv = () => {
 
         fetchClients();
     }, []);
+    useEffect(() => {
+        const fetchUtilisateur = async () => {
+            try {
+                const response = await axios.get('http://localhost:5257/api/utilisateur');
+                if (response && response.data) {
+                    setUtilisateursList(response.data);
+                }
+            } catch (error) {
+                console.error('Erreur lors de la récupération des clients:', error);
+            }
+        };
 
-    const types = ['CLIMATISATION', 'POMPE', 'CHAUDIERE'];
-
-    const getTypeValue = (type) => {
-        switch (type) {
-            case 'CLIMATISATION':
-                return 0;
-            case 'POMPE':
-                return 1;
-            case 'CHAUDIERE':
-                return 2;
-            default:
-                return -1; // Valeur par défaut ou valeur incorrecte
-        }
-    };
+        fetchUtilisateur();
+    }, []);
 
     const handleDateDebutChange = (event) => {
         setDateDebut(event.target.value);
     };
 
-    const handleDateFinChange = (event) => {
-        setDateFin(event.target.value);
-    };
 
-    const ajoutChantier = async () => {
+    const ajoutRdv = async () => {
         try {
-            const response = await axios.post('http://localhost:5257/api/chantier/', {
-                Type: getTypeValue(type),
+            const response = await axios.post('http://localhost:5257/api/rdv/', {
+                Lieu: lieu,
                 Description: description,
-                DateDebut: dateDebut,
-                DateFin: dateFin,
-                Adresse: adresse,
+                DateRdv: dateDebut,
+                Utilisateur: utilisateur,
                 Client: client,
             });
 
             if (response && response.data) {
                 console.log('Réponse du serveur:', response.data);
-                setAjout(true);
             } else {
                 console.error('Réponse du serveur non valide:', response);
             }
@@ -78,16 +71,8 @@ const Rdv = () => {
     return (
         <div className='login'>
             <Navordi />
-            <h1>Ajout d'un chantier</h1>
+            <h1>Ajout d'un rendez-vous</h1>
             <form>
-                <select value={type} onChange={(e) => setType(e.target.value)}>
-                    <option value="">Sélectionnez le type de chantier</option>
-                    {types.map((r) => (
-                        <option key={r} value={r}>
-                            {r}
-                        </option>
-                    ))}
-                </select>
                 <select value={client} onChange={(e) => setClient(e.target.value)}>
                     <option value="">Sélectionnez le client</option>
                     {clientsList.map((client) => (
@@ -99,11 +84,19 @@ const Rdv = () => {
                 <p>
                 <Link to="/client">Ajouter un client</Link>
                 </p>
+                <select value={utilisateur} onChange={(e) => setUtilisateur(e.target.value)}>
+                    <option value="">Sélectionnez l'utilisateur</option>
+                    {utilisateursList.map((utilisateur) => (
+                        <option key={utilisateur.utilisateurId} value={utilisateur.utilisateurId}>
+                            {utilisateur.nomUtilisateur}
+                        </option>
+                    ))}
+                </select>
                 <input
                     type="text"
                     placeholder="Entrez l'adresse"
-                    value={adresse}
-                    onChange={(e) => setAdresse(e.target.value)}
+                    value={lieu}
+                    onChange={(e) => setLieu(e.target.value)}
                 />
                 <input
                     type="text"
@@ -121,18 +114,8 @@ const Rdv = () => {
                         onChange={handleDateDebutChange}
                     />
                 </div>
-                <div className="date-selector">
-                    <label htmlFor="dateFin">Date et heure de fin :</label>
-                    <input
-                        type="datetime-local"
-                        id="dateFin"
-                        name="dateFin"
-                        value={dateFin}
-                        onChange={handleDateFinChange}
-                    />
-                </div>
                 <Link to="/planninga">
-                <button type="button" onClick={ajoutChantier}>
+                <button type="button" onClick={ajoutRdv}>
                     Ajouter
                 </button>
                 </Link>
