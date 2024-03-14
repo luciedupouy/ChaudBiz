@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Navordi from '../components/Navordi';
 import axios from 'axios';
-import '../styles/Login.css';
-import '../styles/Global.css';
 import { Link } from 'react-router-dom';
 
 const Rdv = () => {
     const [lieu, setLieu] = useState('');
     const [description, setDescription] = useState('');
     const [dateDebut, setDateDebut] = useState('');
-    const [client, setClient] = useState('');
-    const [utilisateur, setUtilisateur] = useState();
+    const [clientId, setClientId] = useState('');
+    const [utilisateurId, setUtilisateurId] = useState('');
     const [clientsList, setClientsList] = useState([]);
-    const [utilisateursList, setUtilisateursList]=useState([]);
+    const [utilisateursList, setUtilisateursList] = useState([]);
 
     useEffect(() => {
         const fetchClients = async () => {
@@ -28,25 +26,25 @@ const Rdv = () => {
 
         fetchClients();
     }, []);
+
     useEffect(() => {
-        const fetchUtilisateur = async () => {
+        const fetchUtilisateurs = async () => {
             try {
                 const response = await axios.get('http://localhost:5257/api/utilisateur');
                 if (response && response.data) {
                     setUtilisateursList(response.data);
                 }
             } catch (error) {
-                console.error('Erreur lors de la récupération des clients:', error);
+                console.error('Erreur lors de la récupération des utilisateurs:', error);
             }
         };
 
-        fetchUtilisateur();
+        fetchUtilisateurs();
     }, []);
 
     const handleDateDebutChange = (event) => {
         setDateDebut(event.target.value);
     };
-
 
     const ajoutRdv = async () => {
         try {
@@ -54,8 +52,8 @@ const Rdv = () => {
                 Lieu: lieu,
                 Description: description,
                 DateRdv: dateDebut,
-                Utilisateur: utilisateur,
-                Client: client,
+                UtilisateurId: utilisateurId,
+                ClientId: clientId
             });
 
             if (response && response.data) {
@@ -73,7 +71,7 @@ const Rdv = () => {
             <Navordi />
             <h1>Ajout d'un rendez-vous</h1>
             <form>
-                <select value={client} onChange={(e) => setClient(e.target.value)}>
+                <select value={clientId} onChange={(e) => setClientId(e.target.value)}>
                     <option value="">Sélectionnez le client</option>
                     {clientsList.map((client) => (
                         <option key={client.clientId} value={client.clientId}>
@@ -82,9 +80,9 @@ const Rdv = () => {
                     ))}
                 </select>
                 <p>
-                <Link to="/client">Ajouter un client</Link>
+                    <Link to="/client">Ajouter un client</Link>
                 </p>
-                <select value={utilisateur} onChange={(e) => setUtilisateur(e.target.value)}>
+                <select value={utilisateurId} onChange={(e) => setUtilisateurId(e.target.value)}>
                     <option value="">Sélectionnez l'utilisateur</option>
                     {utilisateursList.map((utilisateur) => (
                         <option key={utilisateur.utilisateurId} value={utilisateur.utilisateurId}>
@@ -115,9 +113,9 @@ const Rdv = () => {
                     />
                 </div>
                 <Link to="/planninga">
-                <button type="button" onClick={ajoutRdv}>
-                    Ajouter
-                </button>
+                    <button type="button" onClick={ajoutRdv}>
+                        Ajouter
+                    </button>
                 </Link>
             </form>
         </div>

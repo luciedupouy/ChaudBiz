@@ -15,10 +15,10 @@ public class RdvController : ControllerBase
 
     // GET: api/student
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Materiel>>> GetItems()
+    public async Task<ActionResult<IEnumerable<Rdv>>> GetItems()
     {
         // Get items
-        var items = _context.Materiels;
+        var items = _context.Rdvs;
         return await items.ToListAsync();
     }
     [HttpGet("{id}")]
@@ -50,16 +50,35 @@ public class RdvController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Rdv>> CreateRdv(Rdv rdv)
+public async Task<ActionResult<Rdv>> CreateRdv(RdvDto rdvCreateDto)
+{
+    if (!ModelState.IsValid)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
-        _context.Rdvs.Add(rdv);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetItem), new { id = rdv.RdvId }, rdv);
+        return BadRequest(ModelState);
     }
+
+    // Vérifiez si l'utilisateur et le client existent dans la base de données
+    var utilisateur = await _context.Utilisateurs.FindAsync(rdvCreateDto.UtilisateurId);
+    var client = await _context.Clients.FindAsync(rdvCreateDto.ClientId);
+
+    if (utilisateur == null || client == null)
+    {
+        return NotFound("Utilisateur ou client non trouvé.");
+    }
+
+    var rdv = new Rdv
+    {
+        Lieu = rdvCreateDto.Lieu,
+        Description = rdvCreateDto.Description,
+        DateRdv = rdvCreateDto.DateRdv,
+        Utilisateur = utilisateur,
+        Client = client
+    };
+
+    _context.Rdvs.Add(rdv);
+    await _context.SaveChangesAsync();
+
+    return CreatedAtAction(nameof(GetItem), new { id = rdv.RdvId }, rdv);
+}
+
 }
