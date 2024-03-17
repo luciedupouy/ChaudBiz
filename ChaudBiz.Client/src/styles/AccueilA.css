@@ -30,7 +30,6 @@
 }
 
 .accueila h1 {
-    margin-left: 4%;
     margin-top: 3%;
 }
 
@@ -38,4 +37,17 @@
     display: flex;
     justify-content: space-around;
     padding: 2% 2%;
+}
+
+.rendez_vous {
+    margin-left: 4%;
+}
+
+.bouton {
+    background-color: #C94277;
+    color: #fff;
+    padding: 8px 2%;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
 }

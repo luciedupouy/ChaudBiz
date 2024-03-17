@@ -83,14 +83,13 @@ const AccueilA = () => {
                     <span className="nombre">{rendezVousDuJour}</span>
                 </div>
             </div>
-            <div >
+            <div className='rendez_vous'>
                 <h1>Mes rendez-vous</h1>
-                <Link to="/rdv">Ajouter un rdv </Link>
+                <Link to="/rdv" className="bouton">Ajouter un rendez-vous </Link>
                 {rendezVousDuJour>0 ? (
                     <div>
                     {rdvs.map((rdv, index)=>(
                         <div key={index} className="rdv">
-                            <div>{index+1}</div>
                             <div>Date : {rdv.dateRdv}</div>
                             <div>Description : {rdv.description}</div>
                             <div>Lieu : {rdv.lieu}</div>

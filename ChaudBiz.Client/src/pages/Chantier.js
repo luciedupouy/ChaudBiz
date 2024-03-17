@@ -80,6 +80,10 @@ const Chantier = () => {
             <Navordi />
             <h1>Ajout d'un chantier</h1>
             <form>
+            <p>
+                    <Link to="/client" className="bouton">Créer un client</Link>
+                
+            </p>
                 <select value={type} onChange={(e) => setType(e.target.value)}>
                     <option value="">Sélectionnez le type de chantier</option>
                     {types.map((r) => (
@@ -96,9 +100,7 @@ const Chantier = () => {
                         </option>
                     ))}
                 </select>
-                <p>
-                <Link to="/client">Ajouter un client</Link>
-                </p>
+               
                 <input
                     type="text"
                     placeholder="Entrez l'adresse"

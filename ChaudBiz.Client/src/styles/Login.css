@@ -24,7 +24,7 @@ form {
     border: none; 
     border-bottom: 1px solid #011638; 
     padding: 8px;
-    margin-bottom: 15%;
+    margin-bottom: 10%;
     background-color: transparent; 
     outline: none; 
   }
@@ -43,6 +43,7 @@ form {
   }
   
   .login {
+    margin-top: 35%;
     text-align: center;
   }
   .logo {

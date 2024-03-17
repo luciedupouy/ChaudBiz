@@ -44,8 +44,9 @@ const MaterielAttente = () => {
     
 
     return (
-        <div >
+        <div className='materielcommande'>
             <Navordi></Navordi>
+            <h1>Matériels à commander</h1>
             <div className='materiel'>
                 {materiels.map((materiel, index) => (
                     <div key={index} className="outil">

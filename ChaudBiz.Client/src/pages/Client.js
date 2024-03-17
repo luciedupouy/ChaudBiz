@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navordi from '../components/Navordi';
 import axios from 'axios';
 import '../styles/Login.css';
@@ -31,7 +31,7 @@ const Client = () => {
     };
 
     return (
-        <div className='login'>
+        <div className='login' >
             <Navordi />
             <h1>Ajout d'un client</h1>
             <form>
@@ -55,7 +55,7 @@ const Client = () => {
                 />
                 <input
                     type="text"
-                    placeholder="Entrez le mail"
+                    placeholder="Entrez le numéro de téléphone"
                     value={tel}
                     onChange={(e) => setTel(e.target.value)}
                 />

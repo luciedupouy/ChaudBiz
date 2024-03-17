@@ -70,6 +70,10 @@ const Rdv = () => {
         <div className='login'>
             <Navordi />
             <h1>Ajout d'un rendez-vous</h1>
+            <p>
+                    <Link to="/client" className="bouton">Créer un client</Link>
+                
+            </p>
             <form>
                 <select value={clientId} onChange={(e) => setClientId(e.target.value)}>
                     <option value="">Sélectionnez le client</option>
@@ -79,9 +83,7 @@ const Rdv = () => {
                         </option>
                     ))}
                 </select>
-                <p>
-                    <Link to="/client">Ajouter un client</Link>
-                </p>
+                
                 <select value={utilisateurId} onChange={(e) => setUtilisateurId(e.target.value)}>
                     <option value="">Sélectionnez l'utilisateur</option>
                     {utilisateursList.map((utilisateur) => (

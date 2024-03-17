@@ -1,9 +1,6 @@
 .ouvr {
-    position: relative;
     display: block;
     justify-content: initial;
-    padding: 100px 0%;
-    margin: 70px 4% 0; /* Ajoutez une marge supérieure pour éviter que le contenu ne soit directement sous l'en-tête */
     overflow-y:auto; /* Ajoutez un défilement vertical lorsque le contenu dépasse */
 }
 
@@ -18,7 +15,4 @@
     display: block; /* Assurez-vous que le bouton est affiché en tant que bloc */
     margin: 0 auto; /* Centrez horizontalement */
     margin-top: 10px; /* Ajoutez un espace au-dessus du bouton */
-  }
-  .date-selector {
-    padding-top: 600px;
   }
