@@ -78,7 +78,7 @@ const Chantier = () => {
     return (
         <div className='login'>
             <Navordi />
-            <h1>Ajout d'un chantier</h1>
+            <h1 className='titre_chantier'>Ajout d'un chantier</h1>
             <form>
             <p>
                     <Link to="/client" className="bouton">Créer un client</Link>

@@ -5,12 +5,11 @@
 form {
   max-width: 70%;
   margin: 0 auto;
-  padding: 5%;
+  padding: 0% 0%;
   padding-bottom: 2%;
   }
 .login h1 {
-  margin-top: 2%;
-  margin-bottom: 2%;
+  margin-bottom: 0%;
   color: #011638;
 }
   
@@ -43,7 +42,6 @@ form {
   }
   
   .login {
-    margin-top: 35%;
     text-align: center;
   }
   .logo {
@@ -59,4 +57,11 @@ form {
     padding-bottom: 5%;
   }
 
+  .titre_chantier {
+    margin-top:35%;
+  }
+
+  .titre_rdv {
+    margin-top:25%;
+  }
   

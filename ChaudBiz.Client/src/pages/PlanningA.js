@@ -29,7 +29,7 @@ const PlanningA = () => {
     }, [selectedDate]);
   
     return (
-      <div>
+      <div className='scroll'>
         <Navordi></Navordi>
         <div className="date-selector">
           <label htmlFor="date">Sélectionnez une date :</label>

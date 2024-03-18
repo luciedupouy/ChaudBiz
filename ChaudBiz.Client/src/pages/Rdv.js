@@ -69,7 +69,7 @@ const Rdv = () => {
     return (
         <div className='login'>
             <Navordi />
-            <h1>Ajout d'un rendez-vous</h1>
+            <h1 className='titre_rdv'>Ajout d'un rendez-vous</h1>
             <p>
                     <Link to="/client" className="bouton">Créer un client</Link>
                 
