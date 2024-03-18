@@ -1,3 +1,14 @@
 .detailchantier{
     margin : 4%
 }
+
+.detailchantier button {
+    margin-top: 2%;
+    background-color: #0D21A1;
+    color: #fff;
+    padding: 4px 10%;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+

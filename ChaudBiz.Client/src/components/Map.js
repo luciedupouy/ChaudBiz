@@ -30,7 +30,7 @@ const LeafletMap = ({ address }) => {
   }
 
   return (
-    <MapContainer center={[lat, lon]} zoom={13} style={{ height: '400px', width: '100%' }}>
+    <MapContainer center={[lat, lon]} zoom={13} style={{ height: '350px', width: '100%' }}>
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker position={[lat, lon]}>
         <Popup>{address}</Popup>

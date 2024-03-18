@@ -89,4 +89,17 @@ public async Task<ActionResult<IEnumerable<Chantier>>> GetUpcomingItems()
         // Return the created chantier
         return CreatedAtAction(nameof(GetItem), new { id = chantier.ChantierId }, chantier);
     }
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTodoItem(int id)
+    {
+        var todo = await _context.Chantiers.FindAsync(id);
+
+        if (todo == null)
+            return NotFound();
+
+        _context.Chantiers.Remove(todo);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 }

@@ -4,6 +4,7 @@ import '../styles/AccueilO.css';
 import Navordi from '../components/Navordi';
 import "../styles/Navordi.css";
 
+
 const PlanningA = () => {
     const today = new Date();
     const initialDate = today.toISOString().slice(0, 10); // Date sélectionnée par défaut est la date actuelle au format "YYYY-MM-DD"

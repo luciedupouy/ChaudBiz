@@ -80,5 +80,18 @@ public async Task<ActionResult<Rdv>> CreateRdv(RdvDto rdvCreateDto)
 
     return CreatedAtAction(nameof(GetItem), new { id = rdv.RdvId }, rdv);
 }
+[HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTodoItem(int id)
+    {
+        var todo = await _context.Rdvs.FindAsync(id);
+
+        if (todo == null)
+            return NotFound();
+
+        _context.Rdvs.Remove(todo);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 
 }
