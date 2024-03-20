@@ -51,3 +51,12 @@
     border-radius: 20px;
     cursor: pointer;
 }
+
+.rendez_vous button {
+    background-color: #C94277;
+    color: #fff;
+    padding: 8px 2%;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}

@@ -1,17 +1,16 @@
+import React, { useState, useEffect } from 'react'; 
 import Navordi from '../components/Navordi';
-import React, { useState, useEffect } from 'react';
 import '../styles/AccueilA.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faToolbox, faCalendarAlt, faTools } from '@fortawesome/free-solid-svg-icons';
+import { faToolbox, faCalendarAlt, faTools, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-
 const AccueilA = () => {
-    const [materielEnAttente, setMaterielEnAttente]=useState(0);
-    const [rendezVousDuJour, setRdvDuJour]=useState(0);
-    const [chantiersEnAttente, setChantiersEnAttente] = useState(0); // État pour stocker le nombre de chantiers en attente
-    const [rdvs, setRdv]=useState([]);
-    // Effectue la requête pour récupérer les chantiers en attente
+    const [materielEnAttente, setMaterielEnAttente] = useState(0);
+    const [rendezVousDuJour, setRdvDuJour] = useState(0);
+    const [chantiersEnAttente, setChantiersEnAttente] = useState(0);
+    const [rdvs, setRdv] = useState([]);
+
     useEffect(() => {
         fetch('http://localhost:5257/api/chantier/upcoming')
             .then(response => {
@@ -27,6 +26,7 @@ const AccueilA = () => {
                 console.error('Error fetching chantiers en attente:', error);
             });
     }, []); 
+
     useEffect(() => {
         fetch('http://localhost:5257/api/materiel/by-etat/1')
             .then(response => {
@@ -60,9 +60,23 @@ const AccueilA = () => {
             });
     }, []); 
 
-    return(
+    const handleDeleteRdv = (id) => {
+        fetch(`http://localhost:5257/api/rdv/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete rendez-vous');
+            }
+            setRdv(rdvs.filter(rdv => rdv.id !== id));
+            window.location.reload();
+        })
+        .catch(error => console.error('Error deleting rendez-vous:', error));
+    };
+
+    return (
         <div className="accueila">
-            <Navordi></Navordi>
+            <Navordi />
             <div className="indicateurs">
                 {/* Indicateur pour les chantiers en attente */}
                 <div className="indicateur">
@@ -86,16 +100,18 @@ const AccueilA = () => {
             <div className='rendez_vous'>
                 <h1>Mes rendez-vous</h1>
                 <Link to="/rdv" className="bouton">Ajouter un rendez-vous </Link>
-                {rendezVousDuJour>0 ? (
+                {rendezVousDuJour > 0 ? (
                     <div>
-                    {rdvs.map((rdv, index)=>(
-                        <div key={index} className="rdv">
-                            <div>Date : {rdv.dateRdv}</div>
-                            <div>Description : {rdv.description}</div>
-                            <div>Lieu : {rdv.lieu}</div>
-                            <div>Client :{rdv.client}</div>
-                        </div>
-                    ))}
+                        {rdvs.map((rdv, index) => (
+                            <div key={index} className="rdv">
+                                <div>Date : {rdv.dateRdv}</div>
+                                <div>Description : {rdv.description}</div>
+                                <div>Lieu : {rdv.lieu}</div>
+                                <div>Client : {rdv.client}</div>
+                                {/* Bouton pour supprimer le rendez-vous */}
+                                <button onClick={() => handleDeleteRdv(rdv.rdvId)}><FontAwesomeIcon icon={faTrash} /> Supprimer</button>
+                            </div>
+                        ))}
                     </div>
                 ) : (
                     <p>Aucun rendez-vous aujourd'hui</p>
