@@ -1,3 +1,5 @@
+// AccueilA.js
+
 import React, { useState, useEffect } from 'react'; 
 import Navordi from '../components/Navordi';
 import '../styles/AccueilA.css';
@@ -107,8 +109,7 @@ const AccueilA = () => {
                                 <div>Date : {rdv.dateRdv}</div>
                                 <div>Description : {rdv.description}</div>
                                 <div>Lieu : {rdv.lieu}</div>
-                                <div>Client : {rdv.client}</div>
-                                {/* Bouton pour supprimer le rendez-vous */}
+                                {rdv.client ? <div>Client : {rdv.client.nomClient}</div> : <div>Client : N/A</div>}
                                 <button onClick={() => handleDeleteRdv(rdv.rdvId)}><FontAwesomeIcon icon={faTrash} /> Supprimer</button>
                             </div>
                         ))}

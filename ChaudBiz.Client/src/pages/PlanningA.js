@@ -32,7 +32,7 @@ const PlanningA = () => {
     return (
       <div className='scroll'>
         <Navordi></Navordi>
-        <div className="date-selector">
+        <div className="date-selector-planning">
           <label htmlFor="date">Sélectionnez une date :</label>
           <input
             type="date"

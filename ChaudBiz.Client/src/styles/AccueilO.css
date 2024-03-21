@@ -19,10 +19,17 @@
   }
 
   .date-selector {
-    margin: 5%;
+    margin: 5% ;
+    margin-bottom: 0%;
   }
 
   .scroll{
     overflow-y: scroll;
     scroll-behavior: smooth;
+  }
+
+  .date-selector-planning {
+    margin-top: 15%;
+    margin-left: 5%;
+
   }

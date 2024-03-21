@@ -20,7 +20,6 @@ const Login = () => {
       });
       console.log(response);
       const userRole = response.data?.role;
-      console.log('Role récupéré:', userRole);
 
       if (userRole === 'ADMINISTRATEUR') {
         setRole('ADMINISTRATEUR');
@@ -53,6 +52,7 @@ const Login = () => {
           placeholder="Adresse e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
         <input
@@ -60,6 +60,7 @@ const Login = () => {
           placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
         <button type="button" onClick={handleLogin}>
