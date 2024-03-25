@@ -114,7 +114,7 @@ const Rdv = () => {
                         onChange={handleDateDebutChange}
                     />
                 </div>
-                <Link to="/planninga">
+                <Link to="/accueila">
                     <button type="button" onClick={ajoutRdv}>
                         Ajouter
                     </button>

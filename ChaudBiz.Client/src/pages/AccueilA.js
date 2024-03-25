@@ -1,5 +1,3 @@
-// AccueilA.js
-
 import React, { useState, useEffect } from 'react'; 
 import Navordi from '../components/Navordi';
 import '../styles/AccueilA.css';

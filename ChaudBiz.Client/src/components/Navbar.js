@@ -1,10 +1,8 @@
-// BottomNavbar.js
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCalendar,faTools } from '@fortawesome/free-solid-svg-icons';
-import '../styles/NavBar.css'; // Importez le fichier CSS ici
+import '../styles/NavBar.css'; 
 
 const BottomNavbar = () => {
   const location = useLocation();

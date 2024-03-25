@@ -17,7 +17,6 @@ builder.Services.AddCors(options =>
             policyBuilder =>
             {
                 policyBuilder.WithOrigins("http://localhost:3000");
-                policyBuilder.WithOrigins("https://65f71ef9cdbd16ab46532851--chaudbiz.netlify.app");
                 policyBuilder.AllowAnyHeader();
                 policyBuilder.AllowAnyMethod();
                 policyBuilder.AllowCredentials();

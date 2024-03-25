@@ -17,7 +17,6 @@ public class RdvController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Rdv>>> GetItems()
     {
-        // Get items
         var items = _context.Rdvs;
         return await items.ToListAsync();
     }
@@ -38,10 +37,8 @@ public class RdvController : ControllerBase
     [HttpGet("by-date")]
     public async Task<ActionResult<IEnumerable<Rdv>>> GetItemsByDate()
     {
-        // Obtenez la date actuelle
         DateTime currentDate = DateTime.Now.Date;
 
-        // Récupérez les rendez-vous de la date actuelle
         var items = await _context.Rdvs
             .Where(r => r.DateRdv.Date == currentDate)
             .ToListAsync();
@@ -57,7 +54,6 @@ public async Task<ActionResult<Rdv>> CreateRdv(RdvDto rdvCreateDto)
         return BadRequest(ModelState);
     }
 
-    // Vérifiez si l'utilisateur et le client existent dans la base de données
     var utilisateur = await _context.Utilisateurs.FindAsync(rdvCreateDto.UtilisateurId);
     var client = await _context.Clients.FindAsync(rdvCreateDto.ClientId);
 

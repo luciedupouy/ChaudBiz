@@ -20,11 +20,10 @@ const MaterielAttente = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ materielId: id, etat: 0 }) // Envoyer l'état mis à jour
+                body: JSON.stringify({ materielId: id, etat: 0 }) 
             });
             if (response.ok) {
                 setShowPopup(true); // Afficher le pop-up après avoir envoyé la requête avec succès
-                // Mettre à jour l'état du matériel localement
                 setMateriels(prevMateriels => 
                     prevMateriels.map(materiel => {
                         if (materiel.materielId === id) {

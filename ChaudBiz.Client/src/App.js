@@ -1,11 +1,8 @@
-// src/App.js
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './pages/Login'; // Importer la page Login
-import Inscription from './pages/Inscription'; // Importer la page Inscription
+import React from 'react';import Login from './pages/Login'; 
+import Inscription from './pages/Inscription'; 
 import AccueilO from './pages/AccueilO';
 import OpeningPage from './pages/PremierePage';
-import ChantierDetails from './pages/ChantierDetails'; // Importer la page de détails du chantier
+import ChantierDetails from './pages/ChantierDetails'; 
 import TodoMateriel from './pages/TodoMateriel';
 import Planning from './pages/Planning';
 import AccueilA from './pages/AccueilA';
@@ -31,7 +28,7 @@ function App() {
         <Route path="/client" component={Client}/>
         <Route path="/rdv" component={Rdv}/>
         <Route path="/planninga" component={PlanningA}/>
-        <Route path="/chantier/:chantierId" component={ChantierDetails} /> {/* Route pour les détails du chantier */}
+        <Route path="/chantier/:chantierId" component={ChantierDetails} /> 
         <Route path="" component={OpeningPage}/>
       </Switch>
     </Router>

@@ -15,7 +15,7 @@
 
 .link {
     text-decoration: none;
-    color: #011638; /* Couleur du texte des liens */
+    color: #011638;
     display: flex;
     flex-direction: column;
     align-items: center;

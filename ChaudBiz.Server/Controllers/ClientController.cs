@@ -39,17 +39,14 @@ public class ClientController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Client>> CreateClient(Client client)
     {
-        // Check if the chantier object is valid
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        // Add the new chantier to the context
         _context.Clients.Add(client);
         await _context.SaveChangesAsync();
 
-        // Return the created chantier
         return CreatedAtAction(nameof(GetItem), new { id = client.ClientId }, client);
     }
 }

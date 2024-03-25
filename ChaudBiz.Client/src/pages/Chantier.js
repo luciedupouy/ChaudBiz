@@ -41,7 +41,7 @@ const Chantier = () => {
             case 'CHAUDIERE':
                 return 2;
             default:
-                return -1; // Valeur par défaut ou valeur incorrecte
+                return -1; // Valeur par défaut 
         }
     };
 

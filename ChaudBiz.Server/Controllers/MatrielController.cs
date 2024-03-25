@@ -18,7 +18,6 @@ public class MaterielController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Materiel>>> GetItems()
     {
-        // Get items
         var items = _context.Materiels;
         return await items.ToListAsync();
     }
@@ -46,7 +45,7 @@ public async Task<IActionResult> PutCourse(int id, MaterielDto materielDto)
         return NotFound();
     }
 
-    materielToUpdate.Etat = materielDto.Etat; // Mettre à jour l'état du matériel
+    materielToUpdate.Etat = materielDto.Etat; 
 
     try
     {

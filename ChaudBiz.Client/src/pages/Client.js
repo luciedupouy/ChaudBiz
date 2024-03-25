@@ -59,7 +59,7 @@ const Client = () => {
                     value={tel}
                     onChange={(e) => setTel(e.target.value)}
                 />
-                <Link to="/ajoutchantier">
+                <Link to="/accueila">
                     <button type="button" onClick={ajoutClient}>
                         Ajouter
                     </button>

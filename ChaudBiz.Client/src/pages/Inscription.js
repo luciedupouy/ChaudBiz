@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../styles/Login.css';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import  '../styles/Global.css'; // Importez le style global
+import  '../styles/Global.css'; 
 
 
 const Inscription = () => {
@@ -28,15 +28,12 @@ const Inscription = () => {
   
       if (response && response.data) {
         console.log('Réponse du serveur:', response.data);
-        // Gérer la réponse du serveur ici (redirection, affichage d'un message, etc.)
         setInscriptionReussie(true);
       } else {
         console.error('Réponse du serveur non valide:', response);
-        // Gérer les erreurs ici (affichage d'un message d'erreur, etc.)
       }
     } catch (error) {
       console.error('Erreur lors de la requête:', error.response ? error.response.data : error.message);
-      // Gérer les erreurs ici (affichage d'un message d'erreur, etc.)
     }
   };
   if (inscriptionReussie) {

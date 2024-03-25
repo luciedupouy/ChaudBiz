@@ -26,7 +26,7 @@ const TodoMateriel = () => {
                     console.error('Error fetching materiels:', error);
                 });
         }
-    }, []); // Assurez-vous de passer un tableau vide en tant que dépendances pour n'exécuter cet effet qu'une seule fois après le montage initial
+    }, []); 
 
     const commanderMateriel = async (id) => {
         try {
@@ -39,7 +39,6 @@ const TodoMateriel = () => {
             });
             if (response.ok) {
                 setShowPopup(true); // Afficher le pop-up après avoir envoyé la requête avec succès
-                // Mettre à jour l'état du matériel localement
                 setMateriels(prevMateriels => 
                     prevMateriels.map(materiel => {
                         if (materiel.materielId === id) {

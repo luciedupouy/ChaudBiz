@@ -17,10 +17,8 @@ public class ChantierController : ControllerBase
     [HttpGet]
 public async Task<ActionResult<IEnumerable<Chantier>>> GetItems()
 {
-    // Get the current date
     DateTime currentDate = DateTime.Now.Date;
 
-    // Filter chantiers based on the current date
     var items = await _context.Chantiers
         .Where(c => c.DateDebut.Date <= currentDate && c.DateFin.Date >= currentDate)
         .ToListAsync();
@@ -41,9 +39,7 @@ public async Task<ActionResult<IEnumerable<Chantier>>> GetUpcomingItems()
     [HttpGet("{id}")]
     public async Task<ActionResult<Chantier>> GetItem(int id)
     {
-        // Find a specific item
-        // SingleAsync() throws an exception if no item is found (which is possible, depending on id)
-        // SingleOrDefaultAsync() is a safer choice here
+       
         var item = await _context.Chantiers.SingleOrDefaultAsync(t => t.ChantierId == id);
 
 
@@ -76,17 +72,14 @@ public async Task<ActionResult<IEnumerable<Chantier>>> GetUpcomingItems()
     [HttpPost]
     public async Task<ActionResult<Chantier>> CreateChantier(Chantier chantier)
     {
-        // Check if the chantier object is valid
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        // Add the new chantier to the context
         _context.Chantiers.Add(chantier);
         await _context.SaveChangesAsync();
 
-        // Return the created chantier
         return CreatedAtAction(nameof(GetItem), new { id = chantier.ChantierId }, chantier);
     }
     [HttpDelete("{id}")]

@@ -9,24 +9,23 @@
     padding: 2% 2%;
     margin: 0px 3%;
     display: grid;
-    text-align: center; /* Centrer le contenu à l'intérieur de l'indicateur */
-    grid-template-rows: auto auto auto; /* Définir trois lignes automatiques */
+    text-align: center; 
+    grid-template-rows: auto auto auto; 
 }
 
 .icone {
-    grid-row: 2; /* Placer l'icône sur la deuxième ligne */
+    grid-row: 2; 
 }
 
 .nombre {
     font-size: 100px;
-    grid-row: 3; /* Placer le nombre sur la troisième ligne */
+    grid-row: 3; 
 }
 
 .label {
-    /* Styles pour le label (peut être ajusté selon vos besoins) */
-    grid-row: 1; /* Placer le label sur la première ligne */
-    font-weight: bold; /* Mettre en gras */
-    font-size: 24px; /* Taille de la police */
+    grid-row: 1; 
+    font-weight: bold;
+    font-size: 24px;
 }
 
 .accueila h1 {

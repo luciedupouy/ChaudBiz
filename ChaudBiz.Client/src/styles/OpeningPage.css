@@ -1,5 +1,3 @@
-/* OpeningPage.css */
-
 .opening-page {
     display: flex;
     flex-direction: column;
@@ -12,12 +10,11 @@
     width: 80%;
     height: auto;
     max-width: 300px;
-     /* Ajoutez une marge en bas du logo selon vos préférences */
   }
   
   .enter-app-link {
     text-decoration: none;
-    color: #333; /* Couleur du texte du lien */
+    color: #333; 
     font-weight: bold;
     cursor: pointer;
   }

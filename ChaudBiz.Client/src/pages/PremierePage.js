@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../logo.jpg'; // Assurez-vous d'importer votre logo ici
-import '../styles/OpeningPage.css'; // Importez le fichier CSS ici
+import logo from '../logo.jpg'; 
+import '../styles/OpeningPage.css'; 
 
 const OpeningPage = () => {
   return (
