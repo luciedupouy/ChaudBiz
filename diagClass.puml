@@ -47,17 +47,10 @@ class Utilisateur {
 + Role : Role
 }
 
-class MaterielChantier {
-+ MaterielCId : int (PK)
-+ Type : Type
-+ Materiels : List<Materiel>
-}
-
-
 Chantier "1..*" -- "1..1" Client
 Document "1..*" -- "1..1" Client
 Rdv "1..*" -- "1..1" Client
 Rdv "1..*" -- "1..1" Utilisateur
-Chantier "1..*" -- "1..1" MaterielChantier
+Chantier "1..*" .. "1..*" Materiel
 
 @enduml

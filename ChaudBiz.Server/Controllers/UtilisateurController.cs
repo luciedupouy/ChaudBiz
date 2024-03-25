@@ -74,7 +74,19 @@ public async Task<IActionResult> Login([FromBody] UtilisateurDto loginDto)
 
     return Unauthorized(new { Message = "Identifiant ou mot de passe incorrect." });
 }
+[HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTodoItem(int id)
+    {
+        var todo = await _context.Utilisateurs.FindAsync(id);
 
+        if (todo == null)
+            return NotFound();
+
+        _context.Utilisateurs.Remove(todo);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 
 
 

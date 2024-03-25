@@ -33,7 +33,7 @@ const Client = () => {
     return (
         <div className='login' >
             <Navordi />
-            <h1>Ajout d'un client</h1>
+            <h1 className='titre_client'>Ajout d'un client</h1>
             <form>
                 <input
                     type="text"

@@ -1,4 +1,6 @@
-import React from 'react';import Login from './pages/Login'; 
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Login from './pages/Login'; 
 import Inscription from './pages/Inscription'; 
 import AccueilO from './pages/AccueilO';
 import OpeningPage from './pages/PremierePage';

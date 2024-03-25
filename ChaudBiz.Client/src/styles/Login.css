@@ -54,10 +54,14 @@ form {
   }
 
   .titre_chantier {
-    margin-top:35%;
+    margin-top:45%;
   }
 
   .titre_rdv {
-    margin-top:25%;
+    margin-top:30%;
+  }
+
+  .titre_client {
+    margin-top:10%;
   }
   

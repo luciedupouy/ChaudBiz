@@ -49,4 +49,17 @@ public class ClientController : ControllerBase
 
         return CreatedAtAction(nameof(GetItem), new { id = client.ClientId }, client);
     }
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTodoItem(int id)
+    {
+        var todo = await _context.Clients.FindAsync(id);
+
+        if (todo == null)
+            return NotFound();
+
+        _context.Clients.Remove(todo);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 }

@@ -23,16 +23,15 @@ public class RdvController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Rdv>> GetItem(int id)
     {
-        
-        var item = await _context.Rdvs.SingleOrDefaultAsync(t => t.RdvId == id);
-
+        var item = await _context.Rdvs
+            .Include(r => r.Utilisateur)
+            .Include(r => r.Client)
+            .SingleOrDefaultAsync(r => r.RdvId == id);
 
         if (item == null)
             return NotFound();
 
-
         return item;
-
     }
     [HttpGet("by-date")]
     public async Task<ActionResult<IEnumerable<Rdv>>> GetItemsByDate()
@@ -40,6 +39,8 @@ public class RdvController : ControllerBase
         DateTime currentDate = DateTime.Now.Date;
 
         var items = await _context.Rdvs
+            .Include(r => r.Utilisateur)
+            .Include(r => r.Client)
             .Where(r => r.DateRdv.Date == currentDate)
             .ToListAsync();
 
